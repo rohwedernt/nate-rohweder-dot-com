@@ -50,9 +50,9 @@ router.delete("/deleteData", (req, res) => {
 
 router.post("/putData", (req, res) => {
   let data = new Data();
-
   const { id, title, imgSrc, content, type } = req.body;
 
+  console.log(id + title + imgSrc + content + type);
   if ((!id && id !== 0) || !title || !imgSrc || !content || !type) {
     return res.json({
       success: false,
