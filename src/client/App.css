@@ -1,0 +1,47 @@
+#root {
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-link {
+  font-family: monospace;
+  width: fit-content;
+  text-decoration: unset;
+  padding: 0 20px;
+}
+
+.selected {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.custom-link:hover {
+  text-decoration: underline;
+}
+
+.custom-link:focus {
+  color: black;
+}
+
+.custom-link:visited {
+  color: blue;
+  text-decoration: unset;
+}
+
+.title {
+  font-family: monospace;
+  font-size: 14px;
+  color: black;
+  text-decoration: unset;
+  padding: 0 5px;
+}
+
+.title:hover {
+  color: black;
+  text-decoration: unset;
+  font-weight: bold;
+}
+
+.title:focus {
+  text-decoration: unset;
+}

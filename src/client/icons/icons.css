@@ -1,0 +1,11 @@
+.icon {
+    height: 50px;
+    width: 50px;
+    filter: grayscale(100%);
+    margin: 30px 460px 0px 30px;
+}
+
+.icon:hover {
+    filter: none;
+    cursor: pointer;
+}

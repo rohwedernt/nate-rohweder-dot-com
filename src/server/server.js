@@ -1,13 +1,14 @@
-const mongoose = require('mongoose');
-const express = require('express');
-var cors = require('cors');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-const Data = require('./data');
-const API_PORT = 3001;
-const app = express();
-const router = express.Router();
-const dbRoute = "mongodb+srv://nrohweder:rohweder@cluster0-e0ymr.mongodb.net/test?retryWrites=true";
+import mongoose from 'mongoose';
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import logger from 'morgan';
+import Data from './data';
+
+const PORT = 3001,
+      app = express(),
+      router = express.Router(),
+      dbRoute = "mongodb+srv://nrohweder:rohweder@cluster0-e0ymr.mongodb.net/test?retryWrites=true";
 
 app.use(cors());
 
@@ -72,4 +73,4 @@ router.post("/putData", (req, res) => {
 
 app.use("/api", router);
 
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(PORT, () => console.log(`LISTENING ON PORT ${PORT}`));
