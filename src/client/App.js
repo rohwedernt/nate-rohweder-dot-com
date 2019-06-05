@@ -54,65 +54,65 @@ class App extends Component {
   }
 
   getDataFromDb = () => {
-    fetch("http://localhost:3001/api/getData")
+    fetch(`/api/getData`)
       .then(data => data.json())
       .then(res => this.setState({ data: res.data }));
   };
 
-  putDataToDB = (title, imgSrc, content, type) => {
-    let currentIds = this.state.data.map(data => data.id);
-    let idToBeAdded = 0;
-    while (currentIds.includes(idToBeAdded)) {
-      ++idToBeAdded;
-    }
+  // putDataToDB = (title, imgSrc, content, type) => {
+  //   let currentIds = this.state.data.map(data => data.id);
+  //   let idToBeAdded = 0;
+  //   while (currentIds.includes(idToBeAdded)) {
+  //     ++idToBeAdded;
+  //   }
 
-    axios.post("http://localhost:3001/api/putData", {
-      id: idToBeAdded,
-      title: title,
-      imgSrc: imgSrc,
-      content: content,
-      type: type
-    });
+  //   axios.post(`http://naterohweder.com:3001/api/putData`, {
+  //     id: idToBeAdded,
+  //     title: title,
+  //     imgSrc: imgSrc,
+  //     content: content,
+  //     type: type
+  //   });
 
-    this.getDataFromDb();
-  };
+  //   this.getDataFromDb();
+  // };
 
-  deleteFromDB = idTodelete => {
-    let objIdToDelete = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idTodelete) {
-        objIdToDelete = dat._id;
-      }
-    });
+  // deleteFromDB = idTodelete => {
+  //   let objIdToDelete = null;
+  //   this.state.data.forEach(dat => {
+  //     if (dat.id == idTodelete) {
+  //       objIdToDelete = dat._id;
+  //     }
+  //   });
 
-    axios.delete("http://localhost:3001/api/deleteData", {
-      data: {
-        id: objIdToDelete
-      }
-    });
+  //   axios.delete(`http://naterohweder.com:3001/api/deleteData`, {
+  //     data: {
+  //       id: objIdToDelete
+  //     }
+  //   });
 
-    this.getDataFromDb();
-  };
+  //   this.getDataFromDb();
+  // };
 
-  updateDB = (idToUpdate, title, imgSrc, content) => {
-    let objIdToUpdate = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idToUpdate) {
-        objIdToUpdate = dat._id;
-      }
-    });
+  // updateDB = (idToUpdate, title, imgSrc, content) => {
+  //   let objIdToUpdate = null;
+  //   this.state.data.forEach(dat => {
+  //     if (dat.id == idToUpdate) {
+  //       objIdToUpdate = dat._id;
+  //     }
+  //   });
 
-    axios.post("http://localhost:3001/api/updateData", {
-      id: objIdToUpdate,
-      update: { 
-        title: title,
-        imgSrc: imgSrc,
-        content: content
-      }
-    });
+  //   axios.post(`http://naterohweder.com:3001/api/updateData`, {
+  //     id: objIdToUpdate,
+  //     update: { 
+  //       title: title,
+  //       imgSrc: imgSrc,
+  //       content: content
+  //     }
+  //   });
 
-    this.getDataFromDb();
-  };
+  //   this.getDataFromDb();
+  // };
 
   handleTitleChange = e => this.setState({ title: e.target.value });
 
