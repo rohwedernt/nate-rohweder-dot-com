@@ -54,10 +54,13 @@ class App extends Component {
   }
 
   getDataFromDb = () => {
-    fetch(`/api/getData`)
+    fetch(`http://localhost:3000/api/getPosts`)
       .then(data => data.json())
       .then(res => this.setState({ data: res.data }));
   };
+
+
+
 
   // putDataToDB = (title, imgSrc, content, type) => {
   //   let currentIds = this.state.data.map(data => data.id);

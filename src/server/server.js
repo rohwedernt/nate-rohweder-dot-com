@@ -3,18 +3,19 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const data = require("./data");
+//const proxy = require('http-proxy-middleware');
 
 
 const app = express(),
       PORT = process.env.PORT || 3000;
       API_ROOT_PATH = '/api';
       router = express.Router(),
-      
-      dev_db_url = "mongodb+srv://nrohweder:rohweder@cluster0-e0ymr.mongodb.net/test?retryWrites=true";
-      var mongoDB = process.env.MONGODB_URI || dev_db_url;
+      dev_db_url = "mongodb+srv://nrohweder:rohweder@cluster0-e0ymr.mongodb.net/test?retryWrites=true",
+      mongoDB = process.env.MONGODB_URI || dev_db_url;
 
+//app.use('/api', proxy({ target: 'localhost:3000', changeOrigin: true }));
 app.use(cors());
-app.use(express.json());
+//app.use(express.json());
 app.use(express.static('build'));
 
 // connect to db
@@ -23,16 +24,15 @@ let db = mongoose.connection;
 db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-
 // endpoints
-app.get('*', (req, res, next) => {
-  if (req.url.startsWith(API_ROOT_PATH)) {
-    return next();
-  }
-  res.sendFile(path.join(__dirname, '../../build/index.html'));
-});
+// app.get('*', (req, res, next) => {
+//   if (req.url.startsWith(API_ROOT_PATH)) {
+//     return next();
+//   }
+//   res.sendFile(path.join(__dirname, '../../build/index.html'));
+// });
 
-router.get("/", (req, res) => {
+router.get("/getPosts", (req, res) => {
   data.find((err, data) => {
     if (err) {
         return res.json({ success: false, error: err });
@@ -42,9 +42,9 @@ router.get("/", (req, res) => {
   });
 });
 
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../../build/index.html'));
+});
 
 app.use("/api", router);
 
