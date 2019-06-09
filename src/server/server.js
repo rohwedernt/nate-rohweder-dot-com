@@ -32,6 +32,10 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 //   res.sendFile(path.join(__dirname, '../../build/index.html'));
 // });
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../build/index.html'));
+});
+
 router.get("/getPosts", (req, res) => {
   data.find((err, data) => {
     if (err) {
@@ -40,10 +44,6 @@ router.get("/getPosts", (req, res) => {
     //res.send(data);
     return res.json({ success: true, data: data });
   });
-});
-
-app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../../build/index.html'));
 });
 
 app.use("/api", router);
