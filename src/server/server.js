@@ -9,7 +9,7 @@ const data = require("./data");
 const app = express(),
       PORT = process.env.PORT || 3000;
       API_ROOT_PATH = '/api';
-      router = express.Router(),
+      //router = express.Router(),
       dev_db_url = "mongodb+srv://nrohweder:rohweder@cluster0-e0ymr.mongodb.net/test?retryWrites=true",
       mongoDB = process.env.MONGODB_URI || dev_db_url;
 
@@ -32,11 +32,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 //   res.sendFile(path.join(__dirname, '../../build/index.html'));
 // });
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../../build/index.html'));
-});
-
-router.get("/getPosts", (req, res) => {
+app.get("/getPosts", (req, res) => {
   data.find((err, data) => {
     if (err) {
         return res.json({ success: false, error: err });
@@ -46,7 +42,15 @@ router.get("/getPosts", (req, res) => {
   });
 });
 
-app.use("/api", router);
+// api.cors((post) => {
+//   return post.value();
+// });
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../../build/index.html'));
+});
+
+//app.use("/api", router);
 
 app.listen(PORT, () => console.log(`LISTENING ON PORT ${PORT}`));
 

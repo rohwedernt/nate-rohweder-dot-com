@@ -25,7 +25,7 @@ export default withAuth(class AdminAuth extends Component {
   }
 
   async login() {
-    // Redirect to '/' after login
+    // Redirect to '/admin' after login
     this.props.auth.login('/admin');
   }
 
@@ -38,10 +38,10 @@ export default withAuth(class AdminAuth extends Component {
     if (this.state.authenticated === null) return null;
     return(
             this.state.authenticated ?
-            <div>
+            (<div>
               <button onClick={this.logout}>Logout</button>
               <AdminView {...this.props} />
-            </div>
+            </div>)
             :
             <button onClick={this.login}>Login</button>
     ); 
